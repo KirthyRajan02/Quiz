@@ -9,10 +9,12 @@ const option_list = document.querySelector(".option_list");
 const time_line = document.querySelector("header .time_line");
 const timeText = document.querySelector(".timer .time_left_txt");
 const timeCount = document.querySelector(".timer .timer_sec");
+const user_details = document.querySelector(".user_details");
+const submit_details = document.querySelector(".submit_details");
 
 // if startQuiz button clicked
 start_btn.onclick = ()=>{
-    info_box.classList.add("activeInfo"); //show info box
+    user_details.classList.add("activeDetails"); //show user details form
 }
 
 // if exitQuiz button clicked
@@ -37,6 +39,8 @@ let userScore = 0;
 let counter;
 let counterLine;
 let widthValue = 0;
+let userName = "";
+let userRoll = "";
 
 const restart_quiz = result_box.querySelector(".buttons .restart");
 const quit_quiz = result_box.querySelector(".buttons .quit");
@@ -151,19 +155,22 @@ function showResult(){
     quiz_box.classList.remove("activeQuiz"); //hide quiz box
     result_box.classList.add("activeResult"); //show result box
     const scoreText = result_box.querySelector(".score_text");
+    let scoreTag = '';
+    
+    // Add user details to result
+    scoreTag += '<span>Name: ' + userName + '</span>';
+    scoreTag += '<span>Roll Number: ' + userRoll + '</span>';
+    
     if (userScore > 14){ // if user scored more than 3
-        //creating a new span tag and passing the user score number and total question number
-        let scoreTag = '<span>Great! 🎉, You have got '+ userScore +' points out of '+ questions.length +' Questions</span>';
-        scoreText.innerHTML = scoreTag;  //adding new span tag inside score_Text
+        scoreTag += '<span>Great! 🎉, You have got '+ userScore +' points out of '+ questions.length +' Questions</span>';
     }
     else if(userScore > 5){ // if user scored more than 1
-        let scoreTag = '<span>Nice! 😎, You have got '+ userScore +' points out of '+ questions.length +' Questions</span>';
-        scoreText.innerHTML = scoreTag;
+        scoreTag += '<span>Nice! 😎, You have got '+ userScore +' points out of '+ questions.length +' Questions</span>';
     }
     else{ // if user scored less than 1
-        let scoreTag = '<span>Yahhhh 😐, You have got '+ userScore +' point out of '+ questions.length +' Questions</span>';
-        scoreText.innerHTML = scoreTag;
+        scoreTag += '<span>Yahhhh 😐, You have got '+ userScore +' point out of '+ questions.length +' Questions</span>';
     }
+    scoreText.innerHTML = scoreTag;  //adding new span tag inside score_Text
 }
 
 function startTimer(time){
@@ -210,4 +217,21 @@ function queCounter(index){
     //creating a new span tag and passing the question number and total question
     let totalQueCounTag = '<span><p>'+ index +'</p> of <p>'+ questions.length +'</p> Questions</span>';
     bottom_ques_counter.innerHTML = totalQueCounTag;  //adding new span tag inside bottom_ques_counter
+}
+
+// Add new submit details handler
+submit_details.onclick = ()=>{
+    const nameInput = document.querySelector("#student_name");
+    const rollInput = document.querySelector("#roll_number");
+    
+    if(nameInput.value.trim() === "" || rollInput.value.trim() === "") {
+        alert("Please enter both name and roll number");
+        return;
+    }
+    
+    userName = nameInput.value.trim();
+    userRoll = rollInput.value.trim();
+    
+    user_details.classList.remove("activeDetails"); //hide user details
+    info_box.classList.add("activeInfo"); //show info box
 }
