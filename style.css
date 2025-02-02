@@ -379,3 +379,74 @@ footer button.show{
     color: #fff;
     background: #007bff;
 }
+
+.user_details {
+    width: 540px;
+    background: #fff;
+    border-radius: 5px;
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.user_details.activeDetails {
+    opacity: 1;
+    z-index: 5;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.user_details .details-title {
+    height: 60px;
+    width: 100%;
+    border-bottom: 1px solid lightgrey;
+    display: flex;
+    align-items: center;
+    padding: 0 30px;
+    border-radius: 5px 5px 0 0;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.user_details .details-form {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user_details .details-form input {
+    height: 45px;
+    padding: 0 15px;
+    font-size: 17px;
+    border: 1px solid #b8daff;
+    border-radius: 5px;
+    outline: none;
+}
+
+.user_details .details-form input:focus {
+    border-color: #007bff;
+}
+
+.user_details .details-form button {
+    height: 45px;
+    padding: 0 20px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background: #007bff;
+    color: #fff;
+    border: 1px solid #007bff;
+    transition: all 0.3s ease;
+}
+
+.user_details .details-form button:hover {
+    background: #0263ca;
+}
